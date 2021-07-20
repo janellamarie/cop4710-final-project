@@ -20,14 +20,13 @@ if ($conn->connect_error) {
         <link rel="stylesheet" href="css/assets.css"/>
         <link rel="stylesheet" href="css/dashboard.css"/>
 
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
 
-        <script src="//code.jquery.com/jquery.min.js"></script>
-        <script src="js/jquery.tabledit.js"></script>
+        <script src="js/jquery-3.6.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.tabledit.js"></script>
         <script type="text/javascript">
 
             function openTab(evt, tabName)
@@ -52,6 +51,44 @@ if ($conn->connect_error) {
                 document.getElementById(tabName).style.display = "inline";
                 evt.currentTarget.className += " active";
             };
+
+            $(document).ready(function(){
+                $('#animals-table').Tabledit({
+                    editButton: true,
+                    deleteButton: false,
+                    saveButton: false,
+                    autoFocus: false,
+                    buttons: {
+                        edit: {
+                            class: 'btn btn-sm btn-primary',
+                            html: '<span class="glyphicon glyphicon-pencil"></span> &nbsp EDIT',
+                            action: 'edit'
+                        }
+                    },
+                    columns: {
+                        identifier: [0, 'AnimalID'],                    
+                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9,' ImagePath']]
+                    }                    
+                });
+
+                $('#applications-table').Tabledit({
+                    editButton: true,
+                    deleteButton: false,
+                    saveButton: false,
+                    autoFocus: false,
+                    buttons: {
+                        edit: {
+                            class: 'btn btn-sm btn-primary',
+                            html: '<span class="glyphicon glyphicon-pencil"></span> &nbsp EDIT',
+                            action: 'edit'
+                        }
+                    },
+                    columns: {
+                        identifier: [0, 'AnimalID'],                    
+                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9,' ImagePath']]
+                    }                    
+                });
+            });
         </script>
     </head>
 
@@ -90,29 +127,195 @@ if ($conn->connect_error) {
                 <div class="top-bar">
                 </div>
 
+                <!-- start of Animals table display -->
                 <div id="animals" class="tabcontent">
                     <div class="scroll">
-                        <table class="btable" id="animal-table">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="animals-table">
+                                <thead>
+                                    <tr>
+                                        <!-- code if admin display -->
+                                        <th>AnimalID</th>
+                                        <th>Name</th>
+                                        <th>Breed</th>
+                                        <th>Species</th>
+                                        <th>Height</th>
+                                        <th>Weight</th>
+                                        <th>DOB</th>
+                                        <th>Arrival_Date</th>
+                                        <th>Color</th>
+                                        <th>Available</th>
+                                        <th>ImagePath</th>
+                                        <th class="tabledit-toolbar-column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php        
+
+                                    // query to executre
+                                    $sql = "SELECT * FROM animals";
+
+                                    // run query
+                                    $result = $conn->query($sql);
+
+                                    // check if query has results
+                                    if($result !== false && $result->num_rows > 0) {
+                                        // display results of query
+                                        while($row = $result->fetch_assoc()) {
+                                            echo 
+                                                '<tr id="' . $row["AnimalID"] . '">' .
+                                                '<td>' .
+                                                '<span class="tabledit-span tabledit-identifier">' . $row["AnimalID"] . '</span>' .
+                                                '<input class="tabledit-input tabledit-identifier" type="hidden" name="AnimalID" value="' . $row["AnimalID"] . '" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Name"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Name" value="' . $row["Name"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;">' . $row["Breed"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Breed" value="' . $row["Breed"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Species"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Species" value="' . $row["Species"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Height"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Height" value="' . $row["Height"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Weight"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Weight" value="' . $row["Weight"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["DOB"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="DOB" value="' . $row["DOB"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Arrival_Date"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Arrival_Date" value="' . $row["Arrival_Date"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Color"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Color" value="' . $row["Color"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Available"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Available" value="' . $row["Available"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["ImagePath"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="ImagePath" value="' . $row["ImagePath"] . '" style="display:none;" disabled>' .
+                                                '</td>';
+                                        }
+                                    } 
+
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of Animals table display -->
+
+                <!-- start of Applications table display -->
+                <div id="applications" class="tabcontent"> 
+                    <div class="scroll">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="applications-table">
+                                <thead>
+                                    <tr>
+                                        <!-- code if admin display -->
+                                        <th>ApplicationID</th>
+                                        <th>ApplicantID</th>
+                                        <th>AnimalID</th>
+                                        <th>HomeType</th>
+                                        <th>Employed</th>
+                                        <th>LandlordApproval</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th class="tabledit-toolbar-column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php        
+
+                                    // query to execute
+                                    $sql = "SELECT * FROM applications";
+
+                                    // run query
+                                    $result = $conn->query($sql);
+
+                                    // check if query has results
+                                    if($result !== false && $result->num_rows > 0) {
+                                        // display results of query
+                                        while($row = $result->fetch_assoc()) {
+                                            echo 
+                                                '<tr id="' . $row["ApplicationID"] . '">' .
+                                                '<td>' .
+                                                '<span class="tabledit-span tabledit-identifier">' . $row["ApplicationID"] . '</span>' .
+                                                '<input class="tabledit-input tabledit-identifier" type="hidden" name="ApplicationID" value="' . $row["ApplicationID"] . '" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["ApplicantID"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="ApplicantID" value="' . $row["ApplicantID"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;">' . $row["AnimalID"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="AnimalID" value="' . $row["AnimalID"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["HomeType"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="HomeType" value="' . $row["HomeType"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["LandlordApproval"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="LandlordApproval" value="' . $row["LandlordApproval"] . '" style="display:none;" disabled>' .
+                                                '</td>';
+                                        }
+                                    } 
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+                <!-- end of Applications table display -->
+
+                <!-- start of Users table display -->
+                <div id="users" class="tabcontent"> 
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="users-table">
                             <tr>
                                 <!-- code if admin display -->
-                                <th>AnimalID</th>
-                                <th>Name</th>
-                                <th>Breed</th>
-                                <th>Species</th>
-                                <th>Height</th>
-                                <th>Weight</th>
-                                <th>DOB</th>
-                                <th>Arrival_Date</th>
-                                <th>Color</th>
-                                <th>Available</th>
-                                <th>ImagePath</th>
+                                <th>UserID</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>FirstName</th>
+                                <th>LastName</th>
+                                <th>MiddleInitial</th>
                                 <th class="tabledit-toolbar-column"></th>
                             </tr>
 
                             <?php        
 
                             // query to executre
-                            $sql = "SELECT * FROM animals";
+                            $sql = "SELECT * FROM users";
 
                             // run query
                             $result = $conn->query($sql);
@@ -122,17 +325,12 @@ if ($conn->connect_error) {
                                 // display results of query
                                 while($row = $result->fetch_assoc()) {
                                     echo '<tr>' .
-                                        '<td class="tabledit-view-mode">' . $row["AnimalID"] . '</td>' .
-                                        '<td class="tabledit-view-mode">' . $row["Name"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Breed"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Species"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Height"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Weight"] . '</td>' .
-                                        '<td class="tabledit-view-mode">' . $row["DOB"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Arrival_Date"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Color"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Available"] . '</td>' .
-                                        '<td class="tabledit-view-mode">' . $row["ImagePath"] . '</td>' .
+                                        '<td class="tabledit-view-mode">' . $row["UserID"] . '</td>' .
+                                        '<td class="tabledit-view-mode">' . $row["Email"] . '</td>'  .
+                                        '<td class="tabledit-view-mode">' . $row["Password"] . '</td>'  .
+                                        '<td class="tabledit-view-mode">' . $row["FirstName"] . '</td>'  .
+                                        '<td class="tabledit-view-mode">' . $row["LastName"] . '</td>'  .
+                                        '<td class="tabledit-view-mode">' . $row["MiddleInitial"] . '</td>' .
                                         '<td>' . 
                                         '<div class="tabledit-toolbar btn-toolbar">' .
                                         '<div class="btn-group btn-group-sm">' .
@@ -149,147 +347,12 @@ if ($conn->connect_error) {
                             ?>
 
                         </table>
-
-                        <script type="text/javascript" language="javascript">
-
-                            $(document).ready(function() {
-                                $('#animal-table').Tabledit({
-                                    url: 'dashboard.php',
-                                    editButton: true,
-                                    deleteButton: false,
-                                    autoFocus: false,
-                                    columns: {
-                                        identifier: [0, 'AnimalID'],                    
-                                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9,' ImagePath']]
-                                    },
-                                    buttons: {
-                                        edit: {
-                                            class: 'btn btn-sm btn-primary',
-                                            html: '<span class="glyphicon glyphicon-pencil"></span> &nbsp EDIT',
-                                            action: 'edit'
-                                        }
-                                    },
-                                });
-                            });
-
-                        </script>
                     </div>
                 </div>
-
-                <div id="applications" class="tabcontent"> <div class="scroll">
-                    <table class="btable" id="applications-table">
-                        <tr>
-                            <!-- code if admin display -->
-                            <th>ApplicationID</th>
-                            <th>ApplicantID</th>
-                            <th>AnimalID</th>
-                            <th>HomeType</th>
-                            <th>Employed</th>
-                            <th>LandlordApproval</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th class="tabledit-toolbar-column"></th>
-                        </tr>
-
-                        <?php        
-
-                        // query to executre
-                        $sql = "SELECT * FROM applications";
-
-                        // run query
-                        $result = $conn->query($sql);
-
-                        // check if query has results
-                        if($result !== false && $result->num_rows > 0) {
-                            // display results of query
-                            while($row = $result->fetch_assoc()) {
-                                echo '<tr>' .
-                                    '<td class="tabledit-view-mode">' . $row["ApplicationID"] . '</td>' .
-                                    '<td class="tabledit-view-mode">' . $row["ApplicantID"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["AnimalID"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["HomeType"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["Employed"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["LandlordApproval"] . '</td>' .
-                                    '<td class="tabledit-view-mode">' . $row["Date"] . '</td>'  .
-                                    '<td>' . 
-                                    '<div class="tabledit-toolbar btn-toolbar">' .
-                                    '<div class="btn-group btn-group-sm">' .
-                                    '<button type="button" class="tabledit-edit-button btn btn-sm btn-primary">' .
-                                    '<span class="glyphicon glyphicon-pencil">' .
-                                    '</span> EDIT' .
-                                    '</button>' .
-                                    '</div>' .
-                                    '</div>' .
-                                    '</td>';
-                            }
-                        } 
-
-                        ?>
-
-                    </table>
-
-                    <script type="text/javascript" language="javascript">
-                        // insert editable script here
-
-                    </script>
-                    </div> 
-                </div>
-
-                <div id="users" class="tabcontent"> 
-                    <table class="btable" id="users-table">
-                        <tr>
-                            <!-- code if admin display -->
-                            <th>UserID</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>MiddleInitial</th>
-                            <th class="tabledit-toolbar-column"></th>
-                        </tr>
-
-                        <?php        
-
-                        // query to executre
-                        $sql = "SELECT * FROM users";
-
-                        // run query
-                        $result = $conn->query($sql);
-
-                        // check if query has results
-                        if($result !== false && $result->num_rows > 0) {
-                            // display results of query
-                            while($row = $result->fetch_assoc()) {
-                                echo '<tr>' .
-                                    '<td class="tabledit-view-mode">' . $row["UserID"] . '</td>' .
-                                    '<td class="tabledit-view-mode">' . $row["Email"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["Password"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["FirstName"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["LastName"] . '</td>'  .
-                                    '<td class="tabledit-view-mode">' . $row["MiddleInitial"] . '</td>' .
-                                    '<td>' . 
-                                    '<div class="tabledit-toolbar btn-toolbar">' .
-                                    '<div class="btn-group btn-group-sm">' .
-                                    '<button type="button" class="tabledit-edit-button btn btn-sm btn-primary">' .
-                                    '<span class="glyphicon glyphicon-pencil">' .
-                                    '</span> EDIT' .
-                                    '</button>' .
-                                    '</div>' .
-                                    '</div>' .
-                                    '</td>';
-                            }
-                        } 
-
-                        ?>
-
-                    </table>
-                    <script>
-                        // insert editable script    
-                    </script>
-                </div>
+                <!-- end of Users table display -->
 
                 <div id="settings" class="tabcontent"> settings </div>
-            </div
+            </div>
         </div>
 
     </body>
