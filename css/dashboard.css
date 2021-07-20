@@ -1,0 +1,105 @@
+.panel
+{
+    display: block;
+    width: 250px;
+    height: 900px;
+    background: linear-gradient(180deg, hsla(278, 100%, 36%, 1) 0%, hsla(276, 98%, 24%, 1) 100%);
+    border-right: 1px solid #c2c2c2;
+}
+
+.img-container
+{
+    background-image: url("../img/dog.png");
+    background-size: contain;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    margin-left: 80px;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+}
+
+.top-bar
+{
+    display: block;
+    width: 100%;
+    height: 100px;
+    background-color: #fdfdfd;
+    border-bottom: 2px solid #dbdbdb;
+}
+
+.work-space
+{
+    background-color: #f8f8f8;
+    display: block;
+    width: 100%;
+}
+
+h1
+{
+    font-family: "Viga", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+}
+
+.scroll
+{
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+/* ------- DATABASE TABLE STYLING ------- */
+.btable 
+{
+    margin: 10px;
+    width: 90%;
+    border-collapse: collapse;
+    border-spacing: 50px 0px;
+    padding: 10px;
+}
+
+.btable th 
+{
+    background-color: #1F7A8C;
+    border: 1px solid #efefef;
+    padding: 10px;
+    white-space: nowrap;
+    color: white;
+    font-family: "Trebuchet MS";
+    font-weight: 100;
+}
+
+.btable td 
+{
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.btable button
+{
+
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    border-color: #1F7A8C;
+    background-color: #022B3A;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+
+}
+
+/*Different background color on every other even row */
+.btable tr:nth-child(even) 
+{
+    background-color: white;
+    border: 1px solid #dcdcdc;
+}
+/* ------- END DATABASE TABLE STYLING ------- */
+
