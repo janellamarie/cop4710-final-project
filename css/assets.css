@@ -287,6 +287,12 @@ on children's focus  */
     transition-duration: 0.25s;
 }
 
+.adopt-button {
+    background-color: #efefef;
+    border: 3px solid #efefef;
+    border-radius: 30px;
+}
+
 .age-filter-container > ul {
     list-style-type: none;
 }

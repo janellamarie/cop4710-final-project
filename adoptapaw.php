@@ -143,7 +143,7 @@ echo '<script>console.log("Connected to database")</script>';
                     $species = $_POST['species'];
                     $breed = $_POST['breed'];
                     if($species == "ALL" && $breed == "ALL") {
-                        $sql = "SELECT Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals";
+                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals";
                     } else if($species != "ALL"){
                         $species = $_POST['species'];
                         $sql = "SELECT Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Species LIKE '$species'";
@@ -176,13 +176,15 @@ echo '<script>console.log("Connected to database")</script>';
                         echo 
                             '<div class="animal-box">' .
                                 '<img src="' . $row["ImagePath"] . '"/>' .
-                                '<form class="animal-data-container" name="AnimalID" value="' . $['AnimalID'] . '">' .
-                                '<ul class="animal-data">' .
-                            '<input class=">'.
-                            '<li><h2><input class="animal-info-field" name="animal-name" type="text" value="'. $row["Name"]  . '" readonly="readonly"/></h2></li>' .
-                            '<li><input class="animal-species" type="text" value="' . $row["Species"] . '" readonly="readonly"/></li>' .
-                            '<li class="animal-age">' . $row["Age"] . ' years old </li>' .
-                            '</ul></div></div>';
+                                '<form method="post" class="animal-data-container" name="AnimalID" value="' . $row["AnimalID"] . '">' .
+                                    '<ul class="animal-data">' .
+                                        '<li><h2>' . $row["Name"]  . '</h2></li>' .
+                                        '<li>' . $row["Species"] . '</li>' .
+                                        '<li>' . $row["Age"] . ' years old </li>' .
+                                    '</ul>'.
+                                    '<button type="submit" class="adopt-button">Adopt</button>' .
+                                '</form>' .
+                            '</div>';
                     }
                 } else {
                     echo '<div class="search-error"><h1> No pets found! </h1></div>';
