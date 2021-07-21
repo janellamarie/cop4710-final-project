@@ -72,7 +72,6 @@ if ($conn->connect_error) {
                     }                    
                 });
 
-
                 $('#applications-table').Tabledit({
                     url: 'update_applications.php',
                     editButton: true,
@@ -88,7 +87,7 @@ if ($conn->connect_error) {
                     },
                     columns: {
                         identifier: [0, 'ApplicationID'],                    
-                        editable: [[1, 'ApplicantID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'], [7, 'Status']]
+                        editable: [[1, 'AnimalID'], [2, 'UserID'], [3, 'ApplicantID'], [4, 'Email'], [5, 'FirstName'], [6,'LastName'], [7, 'MiddleInitial'], [8, 'DOB'], [9, 'Address'], [10, 'HomeType'], [11, 'Employed'], [12, 'LandlordApproval'], [13, 'Date'], [14, 'Status']]
                     }                    
                 });
 
@@ -121,25 +120,25 @@ if ($conn->connect_error) {
                 <div class="img-container"></div>
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'animals')">
-                        <img src="../img/paw.png">
+                        <img src="img/paw.png">
                         Animals
                     </button>
                 </div>
-
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'applications')">
-                        <img src="../img/application.png">
+                        <img src="img/application.png">
                         Applications</button>
                 </div>
+
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'users')">
-                        <img src="../img/person.png">
+                        <img src="img/person.png">
                         Users
                     </button>
                 </div>
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'settings')">
-                        <img src="../img/settings.png">
+                        <img src="img/settings.png">
                         Settings</button>
                 </div>
             </div>
@@ -259,8 +258,15 @@ if ($conn->connect_error) {
                                     <tr>
                                         <!-- code if admin display -->
                                         <th>ApplicationID</th>
-                                        <th>ApplicantID</th>
                                         <th>AnimalID</th>
+                                        <th>UserID</th>
+                                        <th>ApplicantID</th>
+                                        <th>Email</th>
+                                        <th>FirstName</th>
+                                        <th>LastName</th>
+                                        <th>MiddleInitial</th>
+                                        <th>DOB</th>
+                                        <th>Address</th>
                                         <th>HomeType</th>
                                         <th>Employed</th>
                                         <th>LandlordApproval</th>
@@ -273,7 +279,7 @@ if ($conn->connect_error) {
                                     <?php        
 
                                     // query to execute
-                                    $sql = "SELECT * FROM applications";
+                                    $sql = "SELECT ApplicationID, AnimalID, UserID, ApplicantID, Email, FirstName, LastName, MiddleInitial, DOB, Address, HomeType, Employed, LandlordApproval, Date, Status FROM applications NATURAL JOIN applicants NATURAL JOIN users;";
 
                                     // run query
                                     $result = $conn->query($sql);
@@ -283,42 +289,96 @@ if ($conn->connect_error) {
                                         // display results of query
                                         while($row = $result->fetch_assoc()) {
                                             echo 
+                                                // ApplicationID
                                                 '<tr id="' . $row["ApplicationID"] . '">' .
                                                 '<td>' .
                                                 '<span class="tabledit-span tabledit-identifier">' . $row["ApplicationID"] . '</span>' .
                                                 '<input class="tabledit-input tabledit-identifier" type="hidden" name="ApplicationID" value="' . $row["ApplicationID"] . '" disabled>' .
                                                 '</td>' .
-
+                                                
+                                                // AnimalID
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["AnimalID"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="AnimalID" value="' . $row["AnimalID"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+                                                
+                                                // UserID
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["UserID"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="UserID" value="' . $row["UserID"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+                                                
+                                                // ApplicantID
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" display: inline;>' . $row["ApplicantID"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="ApplicantID" value="' . $row["ApplicantID"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
-
-                                                '<td class="tabledit-view-mode">' .
-                                                '<span class="tabledit-span" display: inline;">' . $row["AnimalID"] . '</span>' .
-                                                '<input class="tabledit-input form-control input-sm" type="text" name="AnimalID" value="' . $row["AnimalID"] . '" style="display:none;" disabled>' .
-                                                '</td>' .
-
-                                                '<td class="tabledit-view-mode">' .
-                                                '<span class="tabledit-span" display: inline;>' . $row["HomeType"] . '</span>' .
-                                                '<input class="tabledit-input form-control input-sm" type="text" name="HomeType" value="' . $row["HomeType"] . '" style="display:none;" disabled>' .
-                                                '</td>' .
                                                 
+                                                // Email
                                                 '<td class="tabledit-view-mode">' .
-                                                '<span class="tabledit-span" display: inline;>' . $row["Employed"] . '</span>' .
-                                                '<input class="tabledit-input form-control input-sm" type="text" name="Employed" value="' . $row["Employed"] . '" style="display:none;" disabled>' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Email"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Email" value="' . $row["Email"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
 
+                                                // FirstName
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;">' . $row["FirstName"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="FirstName" value="' . $row["FirstName"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                // LastName
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["LastName"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="LastName" value="' . $row["LastName"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                // MiddleInitial
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["MiddleInitial"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="MiddleInitial" value="' . $row["MiddleInitial"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                // DOB
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["DOB"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="DOB" value="' . $row["DOB"] . '" style="display:none;" disabled>' .
+
+                                                // Address
+                                                '</td>' .
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Address"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Address" value="' . $row["Address"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                // HomeType
+                                                '</td>' .
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["HomeType"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="HomeType" value="' . $row["HomeType"] . '" style="display:none;" disabled>' .
+                                                '</td>' . 
+                                                
+                                                // Employed
+                                                '</td>' .
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Employed"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Employed" value="' . $row["Employed"] . '" style="display:none;" disabled>' .
+                                                '</td>' . 
+                                                
+                                                // LandlordApproval
+                                                '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["LandlordApproval"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="LandlordApproval" value="' . $row["LandlordApproval"] . '" style="display:none;" disabled>' .
+                                                '</td>' . 
                                                 
+                                                // Date
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["Date"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="Date" value="' . $row["Date"] . '" style="display:none;" disabled>' .
-                                                '</td>' .
+                                                '</td>' . 
                                                 
+                                                // Status
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["Status"] . '</span>' .

@@ -31,6 +31,18 @@ if ($input['action'] == 'edit') {
         "' WHERE ApplicationID='" . $input['ApplicationID'] . "';";
     $conn->query($sql);
 
+    $sql = "UPDATE users SET Email='" . $input['Email'] . 
+            "', FirstName='" . $input['FirstName'] . 
+            "', LastName='" . $input['LastName'] . 
+            "', MiddleInitial='" . $input['MiddleInitial'] . 
+            "' WHERE UserID='" . $input['UserID'] . "';";
+    $conn->query($sql);
+    
+    $sql = "UPDATE applicants SET DOB='" . $input['DOB'] .
+           "', Address='" . $input['Address'] .
+           "' WHERE ApplicantID='" . $input['ApplicantID'] . "';";
+    $conn->query($sql);
+    
     // update Adopters and Animals tables
     if($input['Status'] == 'APPROVED') {
         // insert approved ApplicantID into Adopters
