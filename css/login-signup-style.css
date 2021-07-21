@@ -1,0 +1,13 @@
+body
+{
+    background: linear-gradient(180deg, hsla(278, 100%, 36%, 1) 0%, hsla(276, 98%, 24%, 1) 100%);
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+}
+
+.login-box
+{
+    display: block;
+    margin-top: 8%;
+    margin-left: 35%;
+}

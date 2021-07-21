@@ -25,7 +25,7 @@ echo '<script>console.log("Connected to database")</script>';
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/assets.css"/>
+        <link rel="stylesheet" href="../css/assets.css"/>
         <script type="text/javascript">
 
             function openSidebar()
@@ -48,17 +48,12 @@ echo '<script>console.log("Connected to database")</script>';
         <div class="header">
             <div class="top-container">
                 <div class="nav-links">
-                    <!--
-<a href="">About</a>
-<a href="">Contact</a>
-<a href="">Donate</a>
-<a href="">Designers</a>
--->
+
                 </div>
 
                 <div class="nav-links">
-                    <button class="btn">Login</button>
-                    <button class="btn">Sign Up</button>
+                    <a class="btn" href="../html/login.html">Login</a>
+                    <a class="btn" href="../html/signup.html">Sign Up</a>
                 </div>
             </div>
 
@@ -100,7 +95,6 @@ echo '<script>console.log("Connected to database")</script>';
                         <select class="select-css" name="breed">
                             <?php 
                             // select all the breeds found in the animal table
-                            $species = $_POST['select_species'];
                             $sql = "SELECT DISTINCT Breed FROM animals;";
                             echo '<option value="ALL"> ALL </option>';
                             $result = $conn->query($sql, $row);
@@ -171,7 +165,7 @@ echo '<script>console.log("Connected to database")</script>';
 
                     $sql .= ";";
 
-                // initial load of the page    
+                    // initial load of the page    
                 } else {
                     // select all available animals
                     $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE';";

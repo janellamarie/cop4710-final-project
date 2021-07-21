@@ -1,6 +1,6 @@
 -- create Database
-DROP SCHEMA IF EXISTS adoptapaw;
-CREATE DATABASE adoptapaw;
+DROP SCHEMA IF EXISTS `adoptapaw`;
+CREATE DATABASE `adoptapaw`;
 
 -- create User table
 CREATE TABLE `adoptapaw`.`users` (
@@ -27,7 +27,7 @@ CREATE TABLE `adoptapaw`.`applicants` (
 
 -- create Manager table
 CREATE TABLE `adoptapaw`.`managers` (
-  `ManagerID` int(10) unsigned zerofill NOT NULL,
+  `ManagerID` int(10) unsigned NOT NULL,
   `UserID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ManagerID`),
   KEY `UserID_idx` (`UserID`),
@@ -87,43 +87,43 @@ CREATE TABLE `adoptapaw`.`adopters` (
 );
 
 -- load dummy data from CSV files
--- put dummy CSV files in C:\xampp\mysql\data\cop4710-final-project\
-LOAD DATA INFILE 'data/animals.csv' # change to path of animals.csv
+-- put dummy CSV files from C:\xampp\htdocs\data\adoptapaw\data\csv in C:\xampp\mysql\data\adoptapaw\
+LOAD DATA INFILE 'animals.csv' # change to path of animals.csv
 INTO TABLE adoptapaw.animals 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA INFILE 'data/users.csv' # change to path of users.csv
+LOAD DATA INFILE 'users.csv' # change to path of users.csv
 INTO TABLE adoptapaw.users
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA INFILE 'data/managers.csv' # change to path of managers.csv
+LOAD DATA INFILE 'managers.csv' # change to path of managers.csv
 INTO TABLE adoptapaw.managers 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA INFILE 'data/admins.csv' # change to path of admins.csv
+LOAD DATA INFILE 'admins.csv' # change to path of admins.csv
 INTO TABLE adoptapaw.admins 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA INFILE 'data/applicants.csv' # change to path of applicants.csv
+LOAD DATA INFILE 'applicants.csv' # change to path of applicants.csv
 INTO TABLE adoptapaw.applicants 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA INFILE 'data/applications.csv' # change to path of applications.csv
+LOAD DATA INFILE 'applications.csv' # change to path of applications.csv
 INTO TABLE adoptapaw.applications 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'

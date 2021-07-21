@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/assets.css"/>
+        <link rel="stylesheet" href="../css/login-signup-style.css"/>
+    </head>
+
+    <body>
+        <div class="login-box" id="signup-form">
+            <form action="../server/signup.php" class="form-container" method="post">
+            
+                <label for="first">First Name</label>
+                <input type="text" name="firstname" placeholder="Enter First Name" maxlength="45" required>
+ 
+                <label for="last">Last Name</label>
+                <input type="text" name="lastname" placeholder="Enter Last Name" maxlength="45" required>
+ 
+                <label for="middle">Middle Initial</label>
+                <input type="text" name="middle" placeholder="Enter Middle Initial" maxlength="1">
+ 
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="Enter Email Address" maxlength="100" required>
+ 
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Enter a Password" maxlength="45" required>
+ 
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" placeholder="Re-enter the Password" maxlength="45" required>
+ 
+                <button type="submit" class="nav-links btn" name="signup-btn">Signup</button>
+            </form>
+        </div>
+    </body>
+</html>

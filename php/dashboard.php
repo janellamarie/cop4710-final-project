@@ -16,17 +16,17 @@ if ($conn->connect_error) {
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/assets.css"/>
-        <link rel="stylesheet" href="css/dashboard.css"/>
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/assets.css"/>
+        <link rel="stylesheet" href="../css/dashboard.css"/>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
 
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/jquery.tabledit.js"></script>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.js"></script>
+        <script src="../js/jquery.tabledit.js"></script>
         <script type="text/javascript">
 
             function openTab(evt, tabName)
@@ -54,7 +54,7 @@ if ($conn->connect_error) {
 
             $(document).ready(function(){
                 $('#animals-table').Tabledit({
-                    url: 'update_animals.php',
+                    url: '../server/update_animals.php',
                     editButton: true,
                     deleteButton: false,
                     saveButton: true,
@@ -73,7 +73,7 @@ if ($conn->connect_error) {
                 });
 
                 $('#applications-table').Tabledit({
-                    url: 'update_applications.php',
+                    url: '../server/update_applications.php',
                     editButton: true,
                     deleteButton: false,
                     saveButton: true,
@@ -92,7 +92,7 @@ if ($conn->connect_error) {
                 });
 
                 $('#users-table').Tabledit({
-                    url: 'update_users.php',
+                    url: '../server/update_users.php',
                     editButton: true,
                     deleteButton: false,
                     saveButton: true,
