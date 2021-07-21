@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 $servername = "localhost:3306";
 $username = "root";
 $password = "";
-$dbname = "test"; // change to db name in local server
+$dbname = "adoptapaw"; // change to db name in local server
 
 // create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
