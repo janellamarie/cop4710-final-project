@@ -56,7 +56,7 @@ if ($conn->connect_error) {
                 $('#animals-table').Tabledit({
                     editButton: true,
                     deleteButton: false,
-                    saveButton: false,
+                    saveButton: true,
                     autoFocus: false,
                     buttons: {
                         edit: {
@@ -71,10 +71,12 @@ if ($conn->connect_error) {
                     }                    
                 });
 
+
+
                 $('#applications-table').Tabledit({
                     editButton: true,
                     deleteButton: false,
-                    saveButton: false,
+                    saveButton: true,
                     autoFocus: false,
                     buttons: {
                         edit: {
@@ -84,9 +86,28 @@ if ($conn->connect_error) {
                         }
                     },
                     columns: {
-                        identifier: [0, 'AnimalID'],                    
-                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9,' ImagePath']]
+                        identifier: [0, 'ApplicationID'],                    
+                        editable: [[1, 'ApplicatnID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'],[7, 'Status']]
                     }                    
+                });
+
+                $('#users-table').Tabledit({
+                    url: 'update_users.php',
+                    editButton: true,
+                    deleteButton: false,
+                    saveButton: true,
+                    autoFocus: false,
+                    buttons: {
+                        edit: {
+                            class: 'btn btn-sm btn-primary',
+                            html: '<span class="glyphicon glyphicon-pencil"></span> &nbsp EDIT',
+                            action: 'edit'
+                        }
+                    },
+                    columns: {
+                        identifier: [0, 'UserID'],
+                        editable: [[1, 'Email'], [2, 'Password'], [3, 'FirstName'], [4, 'LastName'], [5, 'MiddleInitial']]
+                    }
                 });
             });
         </script>
@@ -103,7 +124,6 @@ if ($conn->connect_error) {
                         Animals
                     </button>
                 </div>
-
 
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'applications')">
@@ -299,54 +319,71 @@ if ($conn->connect_error) {
 
                 <!-- start of Users table display -->
                 <div id="users" class="tabcontent"> 
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered" id="users-table">
-                            <tr>
-                                <!-- code if admin display -->
-                                <th>UserID</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>MiddleInitial</th>
-                                <th class="tabledit-toolbar-column"></th>
-                            </tr>
+                    <div class="scroll">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="users-table">
+                                <thead>
+                                    <tr>
+                                        <!-- code if admin display -->
+                                        <th>UserID</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>FirstName</th>
+                                        <th>LastName</th>
+                                        <th>MiddleInitial</th>
+                                        <th class="tabledit-toolbar-column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php        
 
-                            <?php        
+                                    // query to execute
+                                    $sql = "SELECT * FROM users";
 
-                            // query to executre
-                            $sql = "SELECT * FROM users";
+                                    // run query
+                                    $result = $conn->query($sql);
 
-                            // run query
-                            $result = $conn->query($sql);
+                                    // check if query has results
+                                    if($result !== false && $result->num_rows > 0) {
+                                        // display results of query
+                                        while($row = $result->fetch_assoc()) {
+                                            echo 
+                                                '<tr id="' . $row["UserID"] . '">' .
+                                                '<td>' .
+                                                '<span class="tabledit-span tabledit-identifier">' . $row["UserID"] . '</span>' .
+                                                '<input class="tabledit-input tabledit-identifier" type="hidden" name="UserID" value="' . $row["UserID"] . '" disabled>' .
+                                                '</td>' .
 
-                            // check if query has results
-                            if($result !== false && $result->num_rows > 0) {
-                                // display results of query
-                                while($row = $result->fetch_assoc()) {
-                                    echo '<tr>' .
-                                        '<td class="tabledit-view-mode">' . $row["UserID"] . '</td>' .
-                                        '<td class="tabledit-view-mode">' . $row["Email"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["Password"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["FirstName"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["LastName"] . '</td>'  .
-                                        '<td class="tabledit-view-mode">' . $row["MiddleInitial"] . '</td>' .
-                                        '<td>' . 
-                                        '<div class="tabledit-toolbar btn-toolbar">' .
-                                        '<div class="btn-group btn-group-sm">' .
-                                        '<button type="button" class="tabledit-edit-button btn btn-sm btn-primary">' .
-                                        '<span class="glyphicon glyphicon-pencil">' .
-                                        '</span> EDIT' .
-                                        '</button>' .
-                                        '</div>' .
-                                        '</div>' .
-                                        '</td>';
-                                }
-                            } 
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Email"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Email" value="' . $row["Email"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
 
-                            ?>
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;">' . $row["Password"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Password" value="' . $row["Password"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
 
-                        </table>
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["FirstName"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="FirstName" value="' . $row["FirstName"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["LastName"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="LastName" value="' . $row["LastName"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["MiddleInitial"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="MiddleInitial" value="' . $row["MiddleInitial"] . '" style="display:none;" disabled>' .
+                                                '</td>';
+                                        }
+                                    } 
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- end of Users table display -->
