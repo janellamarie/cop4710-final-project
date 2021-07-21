@@ -48,10 +48,12 @@ echo '<script>console.log("Connected to database")</script>';
         <div class="header">
             <div class="top-container">
                 <div class="nav-links">
+                    <!--
                     <a href="">About</a>
                     <a href="">Contact</a>
                     <a href="">Donate</a>
                     <a href="">Designers</a>
+                    -->
                 </div>
 
                 <div class="nav-links">
@@ -84,6 +86,7 @@ echo '<script>console.log("Connected to database")</script>';
                         <h1>Species</h1>
                         <select class="select-css" name="species" id="select_species">
                             <?php 
+                            // select all the species found in the animals table
                             $sql = "SELECT DISTINCT Species FROM animals;";
                             echo '<option value="ALL"> ALL </option>';
                             $result = $conn->query($sql);
@@ -94,9 +97,9 @@ echo '<script>console.log("Connected to database")</script>';
                         </select>
 
                         <h1>Breed</h1>
-                        <!-- edit so that the select changes depending on the Breed -->
                         <select class="select-css" name="breed">
                             <?php 
+                            // select all the breeds found in the animal table
                             $species = $_POST['select_species'];
                             $sql = "SELECT DISTINCT Breed FROM animals;";
                             echo '<option value="ALL"> ALL </option>';
@@ -145,13 +148,17 @@ echo '<script>console.log("Connected to database")</script>';
                 } else if(isset($_POST['species'], $_POST['breed'])) {
                     $species = $_POST['species'];
                     $breed = $_POST['breed'];
-                    if($species == "ALL" && $breed == "ALL") { // wants to see all Animals
+                    if($species == "ALL" && $breed == "ALL") { 
+                        // select all available animals
                         $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE'";
                     }else if($breed != "ALL" && $species != "ALL") {
+                        // select all avaialble animals and filter by breed and species
                         $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Species='$species' AND Breed='$breed'";
                     } else if($species != "ALL"){ 
+                        // select all available animals and filter by selected species
                         $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Species='$species'";
                     } else if($breed != "ALL") {
+                        // select all available animals and filter by selected breed
                         $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Breed='$breed'";
                     } 
                     
@@ -170,6 +177,7 @@ echo '<script>console.log("Connected to database")</script>';
                                      
                 // initial load of the page    
                 } else {
+                    // select all available animals
                     $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE';";
                 }
 

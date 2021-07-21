@@ -31,6 +31,7 @@ if ($input['action'] == 'edit') {
         "' WHERE ApplicationID='" . $input['ApplicationID'] . "';";
     $conn->query($sql);
 
+    // update users table
     $sql = "UPDATE users SET Email='" . $input['Email'] . 
             "', FirstName='" . $input['FirstName'] . 
             "', LastName='" . $input['LastName'] . 
@@ -38,18 +39,19 @@ if ($input['action'] == 'edit') {
             "' WHERE UserID='" . $input['UserID'] . "';";
     $conn->query($sql);
     
+    // update applicants table
     $sql = "UPDATE applicants SET DOB='" . $input['DOB'] .
            "', Address='" . $input['Address'] .
            "' WHERE ApplicantID='" . $input['ApplicantID'] . "';";
     $conn->query($sql);
     
-    // update Adopters and Animals tables
+    // update adopters and animals tables
     if($input['Status'] == 'APPROVED') {
         // insert approved ApplicantID into Adopters
         $sql = "INSERT INTO adopters(ApplicantID) VALUES ('" . $input['ApplicantID'] . "');";
         $conn->query($sql);
         
-        // update Animal availability
+        // update animal availability
         $sql = "UPDATE animals SET Available='NOT_AVAILABLE' WHERE AnimalID=" . $input['AnimalID'] . ";";
         $conn->query($sql);
     }

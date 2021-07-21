@@ -222,8 +222,8 @@ on children's focus  */
 .animal-box .animal-data-container {
     font-family: "Verdana", sans-serif;
     position: relative;
-    top: -300px;
-    opacity: 0;
+    top: -190px;
+    visibility: hidden;
 }
 
 .animal-box > img {
@@ -234,14 +234,16 @@ on children's focus  */
 }
 
 
-.animal-box > img:hover {
-    opacity: 0.2;
+.animal-data-container {
+    visibility: hidden;
 }
 
 .animal-box:hover .animal-data-container {
+    padding: 9px;
     position: relative;
-    opacity: 1;
+    background: rgba(214, 214, 214, 0.8);
     transition: .5s ease;
+    visibility: visible;
 }
 
 .animal-data-container > ul {
@@ -328,6 +330,19 @@ on children's focus  */
     background: transparent;
 }
 
+.adopt-button {
+    position: relative;
+    border: 3px solid #efefef;
+    left: 40px;
+    width: 100px;
+    font-size: 15px; 
+}
+
+.adopt-button:hover {
+    background-color: gray;
+    color: white;
+    border: 3px solid gray;
+}
 
 
 

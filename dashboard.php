@@ -172,7 +172,7 @@ if ($conn->connect_error) {
                                 <tbody>
                                     <?php        
 
-                                    // query to executre
+                                    // get all animals and their data from the database
                                     $sql = "SELECT * FROM animals";
 
                                     // run query
@@ -295,25 +295,25 @@ if ($conn->connect_error) {
                                                 '<span class="tabledit-span tabledit-identifier">' . $row["ApplicationID"] . '</span>' .
                                                 '<input class="tabledit-input tabledit-identifier" type="hidden" name="ApplicationID" value="' . $row["ApplicationID"] . '" disabled>' .
                                                 '</td>' .
-                                                
+
                                                 // AnimalID
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" display: inline;>' . $row["AnimalID"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="AnimalID" value="' . $row["AnimalID"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
-                                                
+
                                                 // UserID
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" display: inline;>' . $row["UserID"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="UserID" value="' . $row["UserID"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
-                                                
+
                                                 // ApplicantID
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" display: inline;>' . $row["ApplicantID"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="ApplicantID" value="' . $row["ApplicantID"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
-                                                
+
                                                 // Email
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" display: inline;>' . $row["Email"] . '</span>' .
@@ -356,28 +356,28 @@ if ($conn->connect_error) {
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["HomeType"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="HomeType" value="' . $row["HomeType"] . '" style="display:none;" disabled>' .
                                                 '</td>' . 
-                                                
+
                                                 // Employed
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["Employed"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="Employed" value="' . $row["Employed"] . '" style="display:none;" disabled>' .
                                                 '</td>' . 
-                                                
+
                                                 // LandlordApproval
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["LandlordApproval"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="LandlordApproval" value="' . $row["LandlordApproval"] . '" style="display:none;" disabled>' .
                                                 '</td>' . 
-                                                
+
                                                 // Date
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["Date"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="Date" value="' . $row["Date"] . '" style="display:none;" disabled>' .
                                                 '</td>' . 
-                                                
+
                                                 // Status
                                                 '</td>' .
                                                 '<td class="tabledit-view-mode">' .
