@@ -56,6 +56,7 @@ if ($input['action'] == 'edit') {
         $conn->query($sql);
     }
 } else if ($input['action'] == 'delete') {
+    // delete application from Application table
     $sql = "DELETE FROM applications WHERE ApplicationID='" . $input['ApplicationID'] . "'";
     $conn->query($sql);
 }

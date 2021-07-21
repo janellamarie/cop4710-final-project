@@ -49,11 +49,11 @@ echo '<script>console.log("Connected to database")</script>';
             <div class="top-container">
                 <div class="nav-links">
                     <!--
-                    <a href="">About</a>
-                    <a href="">Contact</a>
-                    <a href="">Donate</a>
-                    <a href="">Designers</a>
-                    -->
+<a href="">About</a>
+<a href="">Contact</a>
+<a href="">Donate</a>
+<a href="">Designers</a>
+-->
                 </div>
 
                 <div class="nav-links">
@@ -78,7 +78,7 @@ echo '<script>console.log("Connected to database")</script>';
         </div>
 
         <div class="content">
-            
+
             <!-- start of filters for pets -->
             <div class="sidebar" id="sidebar">
                 <div class="custom-select">
@@ -144,7 +144,7 @@ echo '<script>console.log("Connected to database")</script>';
                 // if search is used
                 if(isset($_POST['search'])) {
                     $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM Animals WHERE Available='AVAILABLE' AND (Name LIKE '%" . $_POST['search'] . "%' OR Breed LIKE '%" . $_POST['search'] . "%' OR Species LIKE '%". $_POST['search'] ."%')";
-                // if the user uses the filters  
+                    // if the user uses the filters  
                 } else if(isset($_POST['species'], $_POST['breed'])) {
                     $species = $_POST['species'];
                     $breed = $_POST['breed'];
@@ -161,20 +161,16 @@ echo '<script>console.log("Connected to database")</script>';
                         // select all available animals and filter by selected breed
                         $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Breed='$breed'";
                     } 
-                    
+
                     // if user selected an Age
                     if(isset($_POST['age'])) {
-                        if($species == "ALL" && $breed == "ALL") {
-                            $age = $_POST['age'];
-                            $sql .= " WHERE " . $age . ";";
-                        } else {
-                            $age = $_POST['age'];
-                            $sql .= ' AND ' . $age;
-                        }
+                        $age = $_POST['age'];
+                        $sql .= ' AND ' . $age;
+
                     }
 
                     $sql .= ";";
-                                     
+
                 // initial load of the page    
                 } else {
                     // select all available animals
@@ -189,15 +185,15 @@ echo '<script>console.log("Connected to database")</script>';
                     while($row = $result->fetch_assoc()) {
                         echo 
                             '<div class="animal-box">' .
-                                '<img src="' . $row["ImagePath"] . '"/>' .
-                                '<form method="post" class="animal-data-container" name="AnimalID" value="' . $row["AnimalID"] . '">' .
-                                    '<ul class="animal-data">' .
-                                        '<li><h2>' . $row["Name"]  . '</h2></li>' .
-                                        '<li>' . $row["Species"] . '</li>' .
-                                        '<li>' . $row["Age"] . ' years old </li>' .
-                                    '</ul>'.
-                                    '<button type="submit" class="adopt-button">Adopt</button>' .
-                                '</form>' .
+                            '<img src="' . $row["ImagePath"] . '"/>' .
+                            '<form method="post" class="animal-data-container" name="AnimalID" value="' . $row["AnimalID"] . '">' .
+                            '<ul class="animal-data">' .
+                            '<li><h2>' . $row["Name"]  . '</h2></li>' .
+                            '<li>' . $row["Species"] . '</li>' .
+                            '<li>' . $row["Age"] . ' years old </li>' .
+                            '</ul>'.
+                            '<button type="submit" class="adopt-button">Adopt</button>' .
+                            '</form>' .
                             '</div>';
                     }
                 } else {
