@@ -90,7 +90,7 @@ if (isset($_POST["login-btn"]))
     if(mysqli_num_rows($result3) != 0)
     {
         $_SESSION["user-type"] == "admin";
-        header("Location: ../php/dashboard.php");
+        header("Location: ../php/admin-dashboard.php");
     }
 
 }

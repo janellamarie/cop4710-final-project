@@ -1,0 +1,116 @@
+/* Heading Styling */
+
+body
+{
+    background-color: #f4f4f4;
+}
+
+panel 
+{
+    display: block;
+    background-color: white;
+    width: 600px;
+    height: 600px;
+    margin-left: 450px;
+    margin-top: 50px;
+    margin-bottom: 150px;
+    padding: 10px;
+        
+}
+
+h2 
+{
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+    color: #022B3A;
+    text-align: center;
+}
+
+h3 
+{   
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+    color: #022B3A;
+    text-align: left;
+}
+
+/*form container9*/
+.form-container 
+{
+    margin-right: 50px;
+    width: auto;
+    padding: 50px;
+    background-color: transparent;
+    font-family: "Trebuchet MS";
+    color: #8003D1;
+}
+
+
+/* Max-width input fields */
+.form-container input[type=text], .form-container input[type=password] 
+{
+    width: 100%;
+    height:auto;
+    padding: 15px;
+    margin-top: 5px;
+    margin-right: 0px;
+    margin-bottom: 22px;
+    margin-left: 0px;
+    border: none;
+    background: #f1f1f1;
+ }
+/* Same as above but for radio type */
+/*.form-container input[type=radio], .form-container input[type=password] 
+{
+    width: 100%;
+    height:auto;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    border: none;
+    background: #f1f1f1;
+ }*/
+
+/* When the inputs are focused, change background */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus 
+{
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn 
+{
+    background-color: #8003D1;
+    color: #ffffff;
+    padding: 15px;
+    border: 1px solid #022B3A;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    margin-left: 20px;
+}
+
+.form-container .btn a
+{
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* cancel button style */
+.form-container .cancel 
+{
+    background-color: #0d0d0d;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover 
+{
+    opacity: 1;
+}

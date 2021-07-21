@@ -62,7 +62,7 @@ if ($conn->connect_error) {
                 $('#animals-table').Tabledit({
                     url: '../server/update_animals.php',
                     editButton: true,
-                    deleteButton: false,
+                    deleteButton: true,
                     saveButton: true,
                     autoFocus: false,
                     buttons: {
@@ -81,7 +81,7 @@ if ($conn->connect_error) {
                 $('#applications-table').Tabledit({
                     url: '../server/update_applications.php',
                     editButton: true,
-                    deleteButton: false,
+                    deleteButton: true,
                     saveButton: true,
                     autoFocus: false,
                     buttons: {
@@ -100,7 +100,7 @@ if ($conn->connect_error) {
                 $('#users-table').Tabledit({
                     url: '../server/update_users.php',
                     editButton: true,
-                    deleteButton: false,
+                    deleteButton: true,
                     saveButton: true,
                     autoFocus: false,
                     buttons: {

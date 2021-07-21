@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/assets.css"/>
+        <link rel="stylesheet" href="../css/application.css" />
+        <script type="text/javascript">
+
+            function openSidebar()
+            {
+                var x = document.getElementById("sidebar");
+                var y = document.getElementById("grid");
+
+                if (x.style.display === "none")
+                {
+                    x.style.display = "block";
+                    y.style.gridTemplateColumns = "auto auto auto auto auto";
+                }
+                else    
+                    x.style.display = "none";
+            }        
+        </script>
+    </head>
+
+    <body>
+   
+    </body>
+
+    <section>
+
+        <box>
+            <panel>
+                <h2>Pet Adoption Application Form:</h2>
+
+                <form method = "post" class="form-container" name="application-form">
+        
+                    <label for="PetName">Pet Name:</label><br>
+                    <input type="text" id="PetName" name="PetName"><br>
+        
+                    <label for="HomeType">Home-Type:</label><br>
+                    <input type="text" id="HomeType" name="HomeType"><br>
+        
+                    <label for="Employed">Are you currently employed?:</label><br>
+                    <input type="radio" id="yes" name="Employed" value="Yes">
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="Employed" value="No">
+                    <label for="no">No</label><br><br>
+        
+                    <label for="LandlordApproval">Has your landlord approved?:</label><br>
+                    <input type="radio" id="yes" name="LandlordApproval" value="Yes">
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="LandlordApproval" value="No">
+                    <label for="no">No</label><br><br>
+        
+                    <label for="Date">Today's date (YYYY-MM-DD):</label><br>
+                    <input type="text" id="Date" name="Date"><br>
+                    
+                    <button type="submit" name="application-submit" class="btn">Submit</button>
+                </form>
+
+            </panel>
+        </box>
+        
+
+    </section>
+
+</html>
