@@ -1,0 +1,2 @@
+ApplicationID,ApplicantID,AnimalID,HomeType,Employed,LandlordApproval,Date,Status
+1,1,12,Apartment,Yes,Yes,2021-07-07,PENDING
