@@ -14,6 +14,7 @@ body
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left;
+    z-index: 1;
 }
 
 .header .nav-links
@@ -71,6 +72,17 @@ body
 
 }
 
+.desc-box
+{
+    display: block;
+    width: 500px;
+    height: 400px;
+    margin-left: 50%;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+}
+
 .menu-btn
 {
     border: 1px solid white;
@@ -120,14 +132,13 @@ body
     justify-content: space-between;
     width: 100%;
     height: 75px;
-    margin-top: 360px;
+    margin-top: -50px;
 }
-
 
 .search-container
 {
     display: flex;
-    height: 55px;
+    height: 50px;
     background-color: #fcfcfc;
     border: 3px solid #fcfcfc;
     border-radius: 30px;
@@ -136,9 +147,8 @@ body
     margin-bottom: 10px;
 }
 
-
 /* change search-container styling 
-on children's focus  */
+   on children's focus  */
 .search-container:focus-within
 {
     border: 3px solid #efefef !important;
@@ -188,8 +198,46 @@ on children's focus  */
 }
 /* end header styling */
 
+/* Add styles to the form container */
+.form-container {
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #242424;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
 
 
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
 
 
 .content
@@ -387,14 +435,6 @@ on children's focus  */
     font-weight:normal;
 }
 /* end select styling */
-
-
-
-
-
-
-
-
 
 /* -------- TAB SYSTEM STYLE -------- */
 .tab
