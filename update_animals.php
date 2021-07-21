@@ -25,7 +25,7 @@ if ($input['action'] == 'edit') {
             "', Species='" . $input['Species'] . 
             "', Height='" . $input['Height'] . 
             "', Weight='" . $input['Weight'] . 
-            "', DOB='" . $$input['DOB'] .  
+            "', DOB='" . $input['DOB'] .  
             "', Arrival_Date='" . $input['Arrival_Date'] . 
             "', Available='" . $input['Available'] . 
             "', Color='" . $input['Color'] . 

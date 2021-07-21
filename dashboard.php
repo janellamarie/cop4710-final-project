@@ -74,6 +74,7 @@ if ($conn->connect_error) {
 
 
                 $('#applications-table').Tabledit({
+                    url: 'update_applications.php',
                     editButton: true,
                     deleteButton: false,
                     saveButton: true,
@@ -87,7 +88,7 @@ if ($conn->connect_error) {
                     },
                     columns: {
                         identifier: [0, 'ApplicationID'],                    
-                        editable: [[1, 'ApplicationID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'], [7, 'Status']]
+                        editable: [[1, 'ApplicantID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'], [7, 'Status']]
                     }                    
                 });
 
@@ -302,11 +303,27 @@ if ($conn->connect_error) {
                                                 '<span class="tabledit-span" display: inline;>' . $row["HomeType"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="HomeType" value="' . $row["HomeType"] . '" style="display:none;" disabled>' .
                                                 '</td>' .
+                                                
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" display: inline;>' . $row["Employed"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Employed" value="' . $row["Employed"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
 
                                                 '<td class="tabledit-view-mode">' .
                                                 '<span class="tabledit-span" style="display: inline;">' . $row["LandlordApproval"] . '</span>' .
                                                 '<input class="tabledit-input form-control input-sm" type="text" name="LandlordApproval" value="' . $row["LandlordApproval"] . '" style="display:none;" disabled>' .
-                                                '</td>';
+                                                
+                                                '</td>' .
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Date"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Date" value="' . $row["Date"] . '" style="display:none;" disabled>' .
+                                                '</td>' .
+                                                
+                                                '</td>' .
+                                                '<td class="tabledit-view-mode">' .
+                                                '<span class="tabledit-span" style="display: inline;">' . $row["Status"] . '</span>' .
+                                                '<input class="tabledit-input form-control input-sm" type="text" name="Status" value="' . $row["Status"] . '" style="display:none;" disabled>' .
+                                                '</td>';            
                                         }
                                     } 
                                     ?>

@@ -76,6 +76,8 @@ echo '<script>console.log("Connected to database")</script>';
         </div>
 
         <div class="content">
+            
+            <!-- start of filters for pets -->
             <div class="sidebar" id="sidebar">
                 <div class="custom-select">
                     <form method="post" id="species_breed_filter">
@@ -132,26 +134,28 @@ echo '<script>console.log("Connected to database")</script>';
                     </form>
                 </div>
             </div>
+            <!-- end of filters for pets -->
 
             <div id="grid" class="grid">
                 <?php
                 // if search is used
                 if(isset($_POST['search'])) {
-                    $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM Animals WHERE Name LIKE '%" . $_POST['search'] . "%' OR Breed LIKE '%" . $_POST['search'] . "%' OR Species LIKE '%". $_POST['search'] ."%'";
-                // if the user uses the filters    
+                    $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM Animals WHERE Available='AVAILABLE' AND (Name LIKE '%" . $_POST['search'] . "%' OR Breed LIKE '%" . $_POST['search'] . "%' OR Species LIKE '%". $_POST['search'] ."%')";
+                // if the user uses the filters  
                 } else if(isset($_POST['species'], $_POST['breed'])) {
                     $species = $_POST['species'];
                     $breed = $_POST['breed'];
-                    if($species == "ALL" && $breed == "ALL") {
-                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals";
-                    } else if($species != "ALL"){
-                        $species = $_POST['species'];
-                        $sql = "SELECT Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Species LIKE '$species'";
+                    if($species == "ALL" && $breed == "ALL") { // wants to see all Animals
+                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE'";
+                    }else if($breed != "ALL" && $species != "ALL") {
+                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Species='$species' AND Breed='$breed'";
+                    } else if($species != "ALL"){ 
+                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Species='$species'";
                     } else if($breed != "ALL") {
-                        $breed = $_POST['breed'];
-                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Breed LIKE '$breed'";
-                    }
-
+                        $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE' AND Breed='$breed'";
+                    } 
+                    
+                    // if user selected an Age
                     if(isset($_POST['age'])) {
                         if($species == "ALL" && $breed == "ALL") {
                             $age = $_POST['age'];
@@ -163,13 +167,15 @@ echo '<script>console.log("Connected to database")</script>';
                     }
 
                     $sql .= ";";
-
+                                     
+                // initial load of the page    
                 } else {
-                    $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals;";
+                    $sql = "SELECT AnimalID, Name, Species, TIMESTAMPDIFF(YEAR, DOB, CURDATE()) AS Age, ImagePath FROM animals WHERE Available='AVAILABLE';";
                 }
 
-                $result = $conn->query($sql);
+                $result = $conn->query($sql); // run query
 
+                // create HTML elements for query
                 if($result !== false && $result->num_rows > 0) {
                     // display results of query
                     while($row = $result->fetch_assoc()) {
@@ -187,6 +193,7 @@ echo '<script>console.log("Connected to database")</script>';
                             '</div>';
                     }
                 } else {
+                    // display that no pets satisfy the user's criteria
                     echo '<div class="search-error"><h1> No pets found! </h1></div>';
                 }
 
