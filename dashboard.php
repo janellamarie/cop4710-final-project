@@ -54,6 +54,7 @@ if ($conn->connect_error) {
 
             $(document).ready(function(){
                 $('#animals-table').Tabledit({
+                    url: 'update_animals.php',
                     editButton: true,
                     deleteButton: false,
                     saveButton: true,
@@ -67,10 +68,9 @@ if ($conn->connect_error) {
                     },
                     columns: {
                         identifier: [0, 'AnimalID'],                    
-                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9,' ImagePath']]
+                        editable: [[1, 'Name'], [2, 'Breed'], [3, 'Species'], [4, 'Height'], [5, 'Weight'], [6,'DOB'],[7, 'Arrival_Date'], [8, 'Color'], [9, 'Available'], [10, 'ImagePath']]
                     }                    
                 });
-
 
 
                 $('#applications-table').Tabledit({
@@ -87,7 +87,7 @@ if ($conn->connect_error) {
                     },
                     columns: {
                         identifier: [0, 'ApplicationID'],                    
-                        editable: [[1, 'ApplicatnID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'],[7, 'Status']]
+                        editable: [[1, 'ApplicationID'], [2, 'AnimalID'], [3, 'HomeType'], [4, 'Employed'], [5, 'LandlordApproval'], [6,'Date'], [7, 'Status']]
                     }                    
                 });
 
